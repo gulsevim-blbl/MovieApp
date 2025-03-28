@@ -1,0 +1,17 @@
+
+*******************Proje Yapısı*******************
+
+    Navbar          : Component
+Home                : Page
+    Genre           : Component
+    MovieList       : Component
+MovieDetail         :Page
+MyList              :Page
+    MovieList       : Component
+        MovieCard   : Component
+
+Total:
+    3 Pages,
+    4 Component            
+        
+
