@@ -8,7 +8,7 @@ import { HOME,  MY_LIST } from './constans/path'
 function App() {
 
   return (
-   <div className='app'>
+   <div className='App'>
       <Navbar/>
       <Routes>  
         {/* Dinamiklik getirmek ve tek bir merkezi sağlamak için farklı yerde tuttuk pathleri  */}
