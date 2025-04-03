@@ -13,6 +13,11 @@ export const getMovieList = createAsyncThunk("getMovieList", async () => {
   return res.data.results;
 });
 
+export const getMovieListByGenre = createAsyncThunk("getMovieListByGenre", async (id) => {
+  const res = await axios.get(`${API_MOVIE_LIST}?api_key=${API_KEY}&with_genres=${id}`);
+  return res.data.results;
+});
+
 export const movieListSlice = createSlice({
   name: "movieList",
   initialState,
@@ -30,6 +35,10 @@ export const movieListSlice = createSlice({
       //Hata aşamasında
       state.status = action.meta.requestStatus; 
       state.error = action.error.message;
+    })
+    builder.addCase(getMovieListByGenre.fulfilled, (state, action) => {
+      state.status = action.meta.requestStatus; 
+      state.movieList = action.payload; 
     })
    
   },

@@ -1,15 +1,17 @@
-import React from 'react'
-import Genre from '../../components/Genre/Genre'
-import MovieList from '../../components/MovieList/MovieList'
-import './Home.css'
+import React, { useState } from 'react';
+import Genre from '../../components/Genre/Genre';
+import MovieList from '../../components/MovieList/MovieList';
+import './Home.css';
 
 const Home = () => {
+  const [selectedGenre, setSelectedGenre] = useState(null);
+
   return (
     <div className='Home'>
-      <Genre />
-      <MovieList />
+      <Genre setSelectedGenre={setSelectedGenre} /> 
+      <MovieList selectedGenre={selectedGenre} />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
