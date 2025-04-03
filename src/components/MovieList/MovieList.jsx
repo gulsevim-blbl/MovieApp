@@ -20,6 +20,7 @@ const MovieList = ({selectedGenre}) => {
 
   return (
     <div className="Movie-list">
+      <h1>{selectedGenre ? selectedGenre.name : "Discover"}</h1>
       <ul>
       {status === "fulfilled" ? (
         movieList?.map((movie) => <MovieCard key={movie.id} movie={movie} />)
