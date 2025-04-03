@@ -1,0 +1,21 @@
+.error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #ff0000; 
+  font-size: 24px;
+  font-weight: bold;
+  animation: move 3s infinite alternate ease-in-out;
+}
+
+@keyframes move {
+  0% {
+    transform: translate(-50%, -50%) translateY(-10px);
+  }
+  100% {
+    transform: translate(-50%, -50%) translateY(10px);
+  }
+}
+

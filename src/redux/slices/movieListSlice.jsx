@@ -1,9 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { API_MOVIE_LIST, API_KEY , } from "../../constans/api";
+import { API_MOVIE_LIST, API_KEY } from "../../constans/api";
 
 const initialState = {
   movieList: [],
+  state: 'idle', // hareket yok başlangıç değeri
+  error: null,  
 };
 
 export const getMovieList = createAsyncThunk("getMovieList", async () => {
@@ -15,10 +17,21 @@ export const movieListSlice = createSlice({
   name: "movieList",
   initialState,
   reducers: {},
-  extraReducers: (builder) => { //Http request
-    builder.addCase(getMovieList.fulfilled, (state, action) => {
-      state.movieList = action.payload; //action payload  ile diziyi güncelliyoruz 
+  extraReducers: (builder) => {//Http request
+    builder.addCase(getMovieList.pending, (state, action) => { // bekleyen aşamasında
+      state.status = action.meta.requestStatus; 
     });
+    builder.addCase(getMovieList.fulfilled, (state, action) => {
+      //Başarılı aşamasında
+      state.status = action.meta.requestStatus; 
+      state.movieList = action.payload; //action payload ile diziyi güncelliyoruz
+    });
+    builder.addCase(getMovieList.rejected, (state, action) => {
+      //Hata aşamasında
+      state.status = action.meta.requestStatus; 
+      state.error = action.error.message;
+    })
+   
   },
 });
 
