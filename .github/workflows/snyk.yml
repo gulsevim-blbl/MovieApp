@@ -1,25 +1,18 @@
 name: Snyk Security Scan
 
-on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+on: [push, pull_request]
 
 jobs:
   snyk:
-    name: Run Snyk Security Scan
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: Set up Snyk CLI
-        uses: snyk/actions/setup@v2
-        with:
-          snyk-token: ${{ secrets.SNYK_TOKEN }}
-
-      - name: Run Snyk test
-        run: snyk test
+    - name: Run Snyk to check for vulnerabilities
+      uses: snyk/actions@v2
+      with:
+        args: test
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
