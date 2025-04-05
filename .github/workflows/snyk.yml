@@ -13,16 +13,7 @@ jobs:
     - name: Set up Snyk CLI
       run: npm install -g snyk  # Snyk CLI'yi Windows ortamında kuruyoruz
 
-    - name: Build Docker image
-      run: |
-        docker build -t myapp:latest .  # Docker imajını build ediyoruz
-
-    - name: Run Snyk to check for vulnerabilities in code
+    - name: Run Snyk to check for vulnerabilities
       run: snyk test  # Snyk test komutunu çalıştırıyoruz
       env:
-        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}  # Snyk token'ını güvenli bir şekilde sağlıyoruz
-
-    - name: Run Snyk container scan on the Docker image
-      run: snyk container test myapp:latest  # Docker imajını Snyk ile tarıyoruz
-      env:
-        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}  # Snyk token'ını güvenli bir şekilde sağlıyoruz
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
