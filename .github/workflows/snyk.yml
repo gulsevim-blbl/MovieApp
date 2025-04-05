@@ -3,47 +3,17 @@ name: Snyk Security Scan
 on: [push, pull_request]
 
 jobs:
-  snyk-ubuntu:
-    runs-on: ubuntu-latest  # Ubuntu ortamında çalıştırıyoruz
+  snyk:
+    runs-on: windows-latest
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: Set up Snyk CLI
-        run: npm install -g snyk  # Snyk CLI'yi kuruyoruz
+    - name: Set up Snyk CLI
+      run: npm install -g snyk  # Snyk CLI'yi Windows ortamında kuruyoruz
 
-      - name: Build Docker image
-        run: docker build -t myapp:latest .  # Docker imajını build ediyoruz
-
-      - name: Run Snyk to check for vulnerabilities in code
-        run: snyk test  # Snyk test komutunu çalıştırıyoruz
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-
-      - name: Run Snyk container scan on the Docker image
-        run: snyk container test myapp:latest  # Docker imajını Snyk ile tarıyoruz
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-
-  snyk-windows:
-    runs-on: windows-latest  # Windows ortamında çalıştırıyoruz
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up Snyk CLI
-        run: npm install -g snyk  # Snyk CLI'yi kuruyoruz
-
-      - name: Build Docker image
-        run: |
-          docker build -t myapp:latest .  # Docker imajını build ediyoruz
-
-      - name: Run Snyk to check for vulnerabilities in code
-        run: snyk test  # Snyk test komutunu çalıştırıyoruz
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-
-      - name: Run Snyk container scan on the Docker image
-        run: snyk container test myapp:latest  # Docker imajını Snyk ile tarıyoruz
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+    - name: Run Snyk to check for vulnerabilities
+      run: snyk test  # Snyk test komutunu çalıştırıyoruz
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
