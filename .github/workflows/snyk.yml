@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   snyk:
-    runs-on: windows-latest  # Windows ortamında çalışacak şekilde değiştirdik
+    runs-on: [ubuntu-latest, macos-latest, windows-latest]
 
     steps:
     - name: Checkout repository
