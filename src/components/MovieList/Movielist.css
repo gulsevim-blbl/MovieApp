@@ -44,11 +44,12 @@
     font-family: "Roboto", sans-serif;
     font-size: 20px;
     border-radius: 50%;
-    border: 1px solid #ffcc00;
+    border: 1px solid #c20000;
     margin: 5px;
 }
 
 .pagination li:hover {
     transform: scale(1.3);
-    color: #ffcc00;
+    color: #c20000;
+    
 }
