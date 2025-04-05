@@ -4,7 +4,7 @@ import { getMovieList, getMovieListByGenre } from "../../redux/slices/movieListS
 import MovieCard from "../MovieCard/MovieCard";
 import ReactPaginate from "react-paginate";
 import { GrPrevious, GrNext } from "react-icons/gr";
-import "./MovieList.css";
+import "./Movielist.css";
 import Loading from "../Loading/Loading";
 
 const MovieList = ({ selectedGenre }) => {
