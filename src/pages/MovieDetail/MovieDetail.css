@@ -39,6 +39,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    /* margin-top: 3px; */
 }
 
 .add-favorite-remove .btn span:first-child {
@@ -47,11 +48,11 @@
 
 .add-favorite-remove .add span:first-child svg {
     color: #ffcc00;
-    transition: all 0.5s;
+    transition: all .5s;
 }
 .add-favorite-remove .remove span:first-child svg {
     color: #ff0000;
-    transition: all 0.5s;
+    transition: all .5s;
 }
 
 .add-favorite-remove .btn:hover span:first-child svg {
@@ -61,7 +62,7 @@
 .add-favorite-remove .btn span:last-child {
     color: #ffffff;
     transition: all .5s;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .add-favorite-remove .btn:hover span:last-child {
@@ -75,11 +76,13 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 14px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #ffffff;
     margin: 0 2px;
     cursor: pointer;
     border-radius: 7px;
-    transition: all 0.3s;
+    transition: all .3s;
     outline: none;
 }
 

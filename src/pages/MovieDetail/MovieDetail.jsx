@@ -5,13 +5,21 @@ import { getMovieDetailById } from "../../redux/slices/MovieDetailSlice";
 import { API_IMG } from "../../constans/api";
 import "./MovieDetail.css";
 import { FaStar } from "react-icons/fa";
+import { IoIosRemoveCircle } from "react-icons/io";
+import { FaHeart } from "react-icons/fa";
 import Loading from "../../components/Loading/Loading";
+import { addToFavorite, removeFromFavorite } from "../../redux/slices/favoriteSlice";
+
 
 const MovieDetail = () => {
   const dispatch = useDispatch();
   const { id } = useParams(); // Dinamik olarak gelen id'yi alıyoruz
   
   const { movieDetail } = useSelector((store) => store.movieDetail);
+
+  
+  const isFavorite = useSelector(store => store.favorites.favoriteMovies?.some(movie => movie.id === id))
+
 
   useEffect(() => {
     dispatch(getMovieDetailById(id));
@@ -34,12 +42,42 @@ const MovieDetail = () => {
 
   const release_year = new Date(release_date).getFullYear(); // Yılı almak için release_date'i Date objesine çeviriyoruz
 
+
+
+  const handleAddFavorite= () =>{
+    const payload = {
+        id,
+        title,
+        poster_path,
+        vote_average
+    }
+    dispatch(addToFavorite(payload))
+
+  }
+
+  const handleRemoveFavorite= () =>{
+      const payload = {
+        id
+      }
+      dispatch(removeFromFavorite(payload))
+  }
+
   return (
     <div className="movie-detail">
       <img className="backdrop" src={`${API_IMG}/${backdrop_path}`} alt={title} />
       <header>
         <p>{title}</p>
-        <div className="add-favorite-remove"></div>
+        <div className="add-favorite-remove">
+          <button
+            className={`btn ${isFavorite ? "remove" : "add"}`}
+            onClick={isFavorite ? handleRemoveFavorite : handleAddFavorite}
+          >
+            <span>
+              {isFavorite ? <IoIosRemoveCircle /> : <FaHeart />}
+            </span>
+            {isFavorite ? "Remove from Favorite" : "Add to Favorite"}
+          </button>
+        </div>
       </header>
       <div className="content">
         <div className="left">
